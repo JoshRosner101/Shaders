@@ -21,7 +21,9 @@ void main()
 
     vec3 color = vec3(0.0);
 
+    //Reflects over y = 0
     uv.x = abs(uv.x);
+    //This moves the shape into the right place
     uv.y += tan((5./6.)*3.1415) * 0.5;
 
     //tan(angle) = y/x
@@ -40,8 +42,11 @@ void main()
         scale *= 3.0;
         uv.x -= 1.5;
 
+        //Reflect over origin
         uv.x = abs(uv.x);
+        //Shift over
         uv.x -= 0.5;
+        //Reflect over normal line
         uv -= normal*min(dot(uv, normal), 0.0) * 2.0;
     }
 
