@@ -48,8 +48,7 @@ void main()
     }
 
     //Create colors with given weights
-    color += dot(minPoint,vec2(.4,.5));
-
+    color += dot(minPoint,vec2(.4,.5)) + minDistFromPixel * 0.15;
 
     gl_FragColor = vec4(color,1.0);
 }
