@@ -9,7 +9,7 @@ uniform float u_time;
 
 // Standard random function
 vec2 random (vec2 uv) {
-    return vec2(fract(sin(dot(uv.xy, vec2(349.2321,353.931)))* 32219.131));
+    return vec2(fract(sin(dot(uv.xy, vec2(451.9143,132.931)))* 32419.131));
 }
 
 void main()
@@ -34,7 +34,7 @@ void main()
     for(float i = -1.0; i <= 1.0; i++) {
         for(float j = -1.0; j <= 1.0; j++) {
             vec2 adjGridCoords = vec2(i,j);
-            vec2 pointOnAdjGrid = 0.5 + 0.5*sin(0.54 * u_mouse.y/u_resolution.y - 0.4 * + u_mouse.x/u_resolution.x+ 6.2831 * random(currentGridId + adjGridCoords));
+            vec2 pointOnAdjGrid = 0.5 + 0.5*sin(0.54 * u_mouse.y/u_resolution.y - 0.4 * u_mouse.x/u_resolution.x+ 6.2831 * random(currentGridId + adjGridCoords));
 
             float distance = length(adjGridCoords + pointOnAdjGrid - currentGridCoord);
             //This makes the colors snap to the individual tiles
@@ -48,7 +48,7 @@ void main()
     }
 
     //Create colors with given weights
-    color += dot(minPoint,vec2(.4,.5)) + minDistFromPixel * 0.15;
+    color += (dot(minPoint,vec2(.3,.5)));
 
     gl_FragColor = vec4(color,1.0);
 }
