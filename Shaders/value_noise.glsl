@@ -15,13 +15,14 @@ float random (vec2 uv) {
 float valueNoise(vec2 uv) {
     //Scale it up for tiling
     uv *= 4.0;
+    uv.y*=0.75;
 
-    vec2 gridUv = fract(uv);
-    vec2 gridId = floor(uv);
+    vec2 gridUv = fract(uv - u_mouse.x/u_resolution.x* 2.0);
+    vec2 gridId = floor(uv - u_mouse.x/u_resolution.x* 2.0);
     //color = vec3(gridId, 0.0) * 0.125;
 
     //Removes rough edges
-    //gridUv = smoothstep(0.0, 1.0, gridUv);
+    gridUv = smoothstep(0.0, 1.0, gridUv);
 
     //randomize and learnarly interpolate for bottom
     float bottomLeft = random(gridId);
@@ -46,7 +47,15 @@ void main()
 
     //random(uv) is just white noise
 
-    color += vec3(valueNoise(uv));
+    float noise = valueNoise(uv);
+    noise += valueNoise(uv * 2.0) / 0.8;
+    noise += valueNoise(uv * 3.0) / 6.0;
+    noise += valueNoise(uv * 6.0) / 9.0;
+    noise += valueNoise(uv * 1.42) / 3.0;
+    noise /= 3.0;
+    noise = pow(noise, 2.0);
+
+    color += vec3(noise);
 
     gl_FragColor = vec4(color,1.0);
 }
