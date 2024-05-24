@@ -5,8 +5,13 @@ uniform vec2 u_resolution;
 uniform float u_time;
 
 float rain(vec2 uv) {
-    uv.x -= mod(uv.x, 0.0125);
-    uv.y -= mod(uv.y, 0.025);
+    // I've transformed the functions used into a varient of the ones I used in my other noise functions
+
+    // uv.x -= mod(uv.x, 0.0125);
+    uv.x = floor(uv.x * 80.0)/80.0;
+
+    // uv.y -= mod(uv.y, 0.025);
+    uv.y = floor(uv.y * 40.0)/40.0;
 
     /*
         //This is an alternate version with different numbers
