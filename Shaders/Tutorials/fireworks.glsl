@@ -40,6 +40,8 @@ void main()
     vec3 color = vec3(0.0);
 
     for(float i = 0.0; i < numExplosions; i++) {
+        //Alternate version with variable time start
+        //float t = u_time + 0.5*sin(u_time+i) + 0.5;
         float t = u_time+i/numExplosions;
         float floorT = floor(t);
         vec3 uniqueColor = sin(vec3(.34,.54,.43)*floorT + i*913.)*0.25 + 0.75;
