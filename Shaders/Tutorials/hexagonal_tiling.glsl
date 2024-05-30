@@ -5,6 +5,13 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+//Pseudo-random number generator
+float Hash21(vec2 uv) {
+    uv = fract(uv*vec2(234.34,435.345));
+    uv += dot(uv, uv+34.23);
+    return fract(uv.x*uv.y);
+}
+
 float hexDist(vec2 uv) {
     uv = abs(uv);
     float c = dot(uv, normalize(vec2(1.0,1.73)));
@@ -41,8 +48,14 @@ void main()
     uv *= 10.0;
     vec4 hexCoordinates = hexCoords(uv);
     float c = smoothstep(0.08, 0.1, hexCoordinates.y*sin(hexCoordinates.z*hexCoordinates.w+u_time));
-    
-    color +=c;
+    if(bool(mod(hexCoordinates.z, 2.0)*2.0-1.0)) {
+    c *= -1.0;
+    }
+    if(bool(mod(hexCoordinates.w, 2.0)*2.0-1.0)) {
+    c *= -1.0;
+    }
+    color +=c-c*abs((hexCoordinates.x)*sin(hexCoordinates.z*hexCoordinates.w+u_time));
+
 
     gl_FragColor = vec4(color,1.0);
 }
