@@ -9,7 +9,7 @@ uniform float u_time;
 float Hash21(vec2 uv) {
     uv = fract(uv*vec2(234.34,435.345));
     uv += dot(uv, uv+34.23);
-    return fract(uv.x*uv.y - u_time*0.0025);
+    return fract(uv.x*uv.y - u_time*0.0005);
 }
 
 void main()
@@ -18,7 +18,7 @@ void main()
 
     vec3 color = vec3(0.0);
     float noise = Hash21(uv);
-    color = vec3(smoothstep(0.99, 1.0, noise));
+    color = vec3(smoothstep(0.997, 1.0, noise));
 
     gl_FragColor = vec4(color,1.0);
 }
