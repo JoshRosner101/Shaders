@@ -5,11 +5,22 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
-//Standard random function BUT different for two points, varying over time
-vec2 randomVector(vec2 uv) {
+//Pseudo-random number generator
+float Hash21(vec2 uv) {
+    uv = fract(uv*vec2(234.34,435.345));
+    uv += dot(uv, uv+34.23);
+    return fract(uv.x*uv.y - u_time*0.0005);
+}
+
+//Pseudo-random number generator
+vec2 Hash22(vec2 uv) {
     float x = dot(uv, vec2(451.9143,132.931));
     float y = dot(uv, vec2(391.4913,841.0293));
     return sin(sin(vec2(x,y))* 32419.131);
+}
+
+float smoothing(float noise) {
+    return smoothstep(0.997, 1.0, noise);
 }
 
 float perlinNoise(vec2 uv) {
@@ -25,10 +36,10 @@ float perlinNoise(vec2 uv) {
     vec2 topRight = gridId + vec2(1.0, 1.0);
 
     //Create a random vector (gradient) at each of those points
-    vec2 gradBottomLeft = randomVector(bottomLeft);
-    vec2 gradBottomRight = randomVector(bottomRight);
-    vec2 gradTopLeft = randomVector(topLeft);
-    vec2 gradTopRight = randomVector(topRight);
+    vec2 gradBottomLeft = Hash22(bottomLeft);
+    vec2 gradBottomRight = Hash22(bottomRight);
+    vec2 gradTopLeft = Hash22(topLeft);
+    vec2 gradTopRight = Hash22(topRight);
 
     //Distance from current pixel to each corner
     vec2 distBottomLeft = gridUv - vec2(0.0, 0.0);
@@ -67,17 +78,6 @@ float fbmPerlinNoise(vec2 uv) {
     return fbmNoise;
 }
 
-//Pseudo-random number generator
-float Hash21(vec2 uv) {
-    uv = fract(uv*vec2(234.34,435.345));
-    uv += dot(uv, uv+34.23);
-    return fract(uv.x*uv.y - u_time*0.0005);
-}
-
-float smoothing(float noise) {
-    return smoothstep(0.997, 1.0, noise);
-}
-
 void main()
 {
     vec2 uv = gl_FragCoord.xy/u_resolution;
@@ -86,7 +86,9 @@ void main()
     float noise = Hash21(uv);
     float noise2 = Hash21(uv + 2.0);
     float noise3 = Hash21(uv + 4.0);
+    //Add the dust
     color = vec3(fbmPerlinNoise(vec2(uv.x+ u_time*0.05, uv.y + u_time*0.2))*0.75);
+    //Add the stars
     color += vec3(smoothing(noise) + 0.5* smoothing(noise2) + 0.35* smoothing(noise3));
 
     gl_FragColor = vec4(color,1.0);
