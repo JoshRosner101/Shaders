@@ -42,9 +42,6 @@ float perlinNoise(vec2 uv) {
     float dotTopLeft = dot(gradTopLeft, distTopLeft);
     float dotTopRight = dot(gradTopRight, distTopRight);
 
-    //Smooth out the noise (removes rough edges)
-    gridUv = smoothstep(0.0, 1.0, gridUv);
-
     //Linearly interpolate everything together
     float bottom = mix(dotBottomLeft, dotBottomRight, gridUv.x);
     float top = mix(dotTopLeft, dotTopRight, gridUv.x);
