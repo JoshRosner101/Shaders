@@ -46,7 +46,7 @@ vec3 starLayer(vec2 uv) {
             
             vec3 tint = sin(vec3(0.4, 0.89, 1.0)*fract(n*4141.02)*62.2831)*0.5 + 0.5;
             //modify this to set the colors differently
-            tint *= vec3(0.35, 0.25,0.45);
+            tint *= vec3(0.2039, 0.1804, 0.2314);
             //twinkle
             star *= sin(u_time*3. + n*6.2831)*0.5+0.75;
             color += star*size*tint;
