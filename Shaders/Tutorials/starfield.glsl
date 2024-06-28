@@ -54,10 +54,7 @@ vec3 starLayer(vec2 uv) {
     }
     return color;
 }
-
-void main()
-{
-    vec2 uv = (gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;
+vec3 generateStarfield(vec2 uv) {
     uv *= 3.0;
     float time = u_time*0.05;
     uv *= rotate(time);
@@ -70,7 +67,16 @@ void main()
         float fade = depth*smoothstep(1.0, 0.9, depth);
         color += starLayer(uv * scale + i*90.0) * fade;
     }
+    //Changes the color to light blue
     color.xyz = color.xxx * vec3(0.549, 0.7373, 1.0);
+    return color;
+}
+
+void main()
+{
+    vec2 uv = (gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;
+    
+    vec3 color = generateStarfield(uv);
 
     gl_FragColor = vec4(color,1.0);
 }
