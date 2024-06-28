@@ -46,7 +46,7 @@ vec3 starLayer(vec2 uv) {
             
             vec3 tint = sin(vec3(0.4, 0.89, 1.0)*fract(n*4141.02)*62.2831)*0.5 + 0.5;
             //modify this to set the colors differently
-            tint *= vec3(0.2039, 0.1804, 0.2314);
+            tint *= vec3(0.4157, 0.1961, 0.6667);
             //twinkle
             star *= sin(u_time*3. + n*6.2831)*0.5+0.75;
             color += star*size*tint;
@@ -70,7 +70,7 @@ void main()
         float fade = depth*smoothstep(1.0, 0.9, depth);
         color += starLayer(uv * scale + i*90.0) * fade;
     }
-    
+    color.xyz = color.xxx * vec3(0.549, 0.7373, 1.0);
 
     gl_FragColor = vec4(color,1.0);
 }
