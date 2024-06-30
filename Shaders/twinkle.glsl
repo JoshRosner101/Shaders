@@ -125,10 +125,10 @@ vec3 starLayer(vec2 uv) {
 vec3 generateStarfield(vec2 uv) {
     uv *= 3.0;
     float time = u_time*0.05;
-    uv *= rotate(time);
+    //uv *= rotate(time);
 
     vec3 color = vec3(0.0);
-    const float numLayers = 4.0;
+    const float numLayers = 3.0;
     for(float i = 0.0; i < 1.0; i += 1.0/numLayers) {
         float depth = fract(i + time);
         float scale = mix(20.0, 0.5, depth);
