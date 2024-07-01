@@ -18,8 +18,9 @@ vec2 rotate(float location) {
     float offset = 3.1415/3.0*location;
     return 0.5*vec2(cos(u_time+offset), sin(u_time+offset));
 }
+
 vec3 tint(float i) {
-    return vec3(1.0);
+    return vec3(mod(i + 1.0, 2.0), mod(4.0,i), (i-4.0 < 0.0));
 }
 
 void main()
