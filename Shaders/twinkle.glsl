@@ -130,7 +130,7 @@ vec3 generateStarfield(vec2 uv) {
     vec3 color = vec3(0.0);
     const float numLayers = 3.0;
     for(float i = 0.0; i < 1.0; i += 1.0/numLayers) {
-        float depth = fract(i + time);
+        float depth = fract(i);
         float scale = mix(20.0, 0.5, depth);
         float fade = depth*smoothstep(1.0, 0.9, depth);
         color += starLayer(uv * scale + i*90.0) * fade;
