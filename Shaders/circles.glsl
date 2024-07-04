@@ -17,7 +17,7 @@ float wholeNumber(float circle) {
 vec2 rotate(float location) {
     float offset = 3.1415/3.0*location;
     float movement = smoothstep(0.0, 10.0, u_time)*3.1415*u_time;
-    return 0.5*vec2(cos(movement+offset)*cos(u_time), sin(movement+offset)*sin(u_time));
+    return 0.5*vec2(cos(movement+offset), sin(movement+offset)*sin(u_time*3.1415));
 }
 
 vec3 tint(float i) {
