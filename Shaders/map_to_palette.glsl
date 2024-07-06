@@ -7,28 +7,38 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 //Standard rgb to HSL function
-vec4 HSL(vec4 c)
-{
-	float low = min(c.r, min(c.g, c.b));
-	float high = max(c.r, max(c.g, c.b));
-	float delta = high - low;
-	float sum = high+low;
+vec3 hsl(vec3 rgb) {
+    vec3 hsl;
+    float minimum = min(rgb.x, min(rgb.y, rgb.z));
+    float maximum = max(rgb.x, max(rgb.y, rgb.z));
+    float delta = maximum - minimum;
+    float sum = maximum + minimum;
+    //Luminance
+    hsl.z = (sum)/2.0;
+    if(delta == 0.0){
+        return hsl;
+    }
 
-	vec4 hsl = vec4(.0, .0, .5 * sum, c.a);
-	if (delta == .0)
-		return hsl;
+    //Saturation
+    if(hsl.z < 0.5) {
+        hsl.y = delta/sum;
+    }
+    else {
+        hsl.y = delta/(2.0-sum);
+    }
 
-	hsl.y = (hsl.z < .5) ? delta / sum : delta / (2.0 - sum);
+    //Hue
+    if(maximum == rgb.r) {
+        hsl.x = (rgb.g-rgb.b)/delta;
+    }
+    else if(maximum == rgb.g) {
+        hsl.x = 2.0 + (rgb.b-rgb.r)/delta;
+    }
+    else {
+        hsl.x = 4.0 + (rgb.r-rgb.g)/delta;
+    }
 
-	if (high == c.r)
-		hsl.x = (c.g - c.b) / delta;
-	else if (high == c.g)
-		hsl.x = (c.b - c.r) / delta + 2.0;
-	else
-		hsl.x = (c.r - c.g) / delta + 4.0;
-
-	hsl.x = mod(hsl.x / 6., 1.);
-	return hsl;
+    return hsl;
 }
 
 void main()
@@ -41,7 +51,7 @@ void main()
 
     gl_FragColor = vec4(col, 1.0);
     
-    vec4 colorMapping = HSL(vec4(col, 1.0));
+    vec3 colorMapping = hsl(col);
     //Convert to HSL and decide which color based on the L (lightness)
     if(colorMapping.b >= 0.6975) {
         gl_FragColor.rgb = vec3(0.8784, 0.9725, 0.8157);
