@@ -17,8 +17,9 @@ float wholeNumber(float circle) {
 vec2 rotate(float location) {
     float offset = 3.1415/3.0*location;
     float delay = 0.0;
-    float movement = smoothstep(delay, 10.0 + delay, u_time)*3.1415*10.0;
-    float center = smoothstep(5.0 + delay, 10.0 + delay, u_time);
+    float speed = 1.0;
+    float movement = smoothstep(delay, 5.0*speed + delay, u_time)*3.1415*10.0;
+    float center = smoothstep(2.5*speed + delay, 5.0*speed + delay, u_time);
     return 0.5*vec2(cos(movement+offset), sin(movement+offset))*cos(center*3.1415/2.0);
 }
 
