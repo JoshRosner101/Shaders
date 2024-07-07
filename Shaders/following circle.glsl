@@ -17,7 +17,12 @@ void main()
 
     vec3 color = vec3(0.0);
     color += vec3(sdCircle(vec2(0.0), uv, 0.1));
-    color -= vec3(sdCircle(mouseuv*0.025, uv, 0.05));
+    vec2 pivot = mouseuv;
+    if(sqrt(mouseuv.x*mouseuv.x + mouseuv.y*mouseuv.y) > 0.75) {
+        pivot = vec2(0.0);
+    }
+
+    color -= vec3(sdCircle(pivot*0.05, uv, 0.05));
 
     gl_FragColor = vec4(color,1.0);
 }
