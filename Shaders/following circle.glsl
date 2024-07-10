@@ -21,8 +21,13 @@ vec3 eyeball(vec2 uv, vec2 center){
     vec2 mouseuv = (2.0*u_mouse.xy-u_resolution.xy)/u_resolution.y - center;
     vec3 color = vec3(0.0);
     float radius = 0.1;
+    float circlularAngle = 0.5*atan(uv.y-center.y, uv.x-center.x);
+    float mouseAngle = 0.5*atan(mouseuv.y-center.y, mouseuv.x-center.x);
+    if(circlularAngle > mouseAngle - 0.1 && circlularAngle < mouseAngle + 0.1) {
+        color = vec3(1.0, 1.0, 0.53);
+    }
     color += vec3(sdCircle(center, uv, radius));
-    color -= vec3(sdCircle(center + mouseuv*0.5*radius, uv, radius*0.5));
+    color -= vec3(2.0*sdCircle(center + mouseuv*0.5*radius, uv, radius*0.5));
     return color;
 }
 
@@ -34,8 +39,8 @@ void main()
     vec3 color = vec3(0.0);
     //vec2 center = 0.5*vec2(cos(u_time), sin(u_time));
     //color += eyeball(uv, center);
-    for(float i = 0.0; i < 5.0; i++) {
-        color += eyeball(uv, Hash12(i));
+    for(float i = 0.0; i < 1.0; i++) {
+        color += eyeball(uv, vec2(0.0));
     }
     
     gl_FragColor = vec4(color,1.0);
