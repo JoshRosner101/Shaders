@@ -21,10 +21,17 @@ vec3 eyeball(vec2 uv, vec2 center){
     vec2 mouseuv = (2.0*u_mouse.xy-u_resolution.xy)/u_resolution.y - center;
     vec3 color = vec3(0.0);
     float radius = 0.1;
+    //We render the angles twice in different orientations because there is a slight overlap
     float circlularAngle = 0.5*atan(uv.y-center.y, uv.x-center.x);
     float mouseAngle = 0.5*atan(mouseuv.y-center.y, mouseuv.x-center.x);
-    if(circlularAngle >= mouseAngle - 0.025 && circlularAngle <= mouseAngle + 0.025) {
+    float circlularAngle2 = 0.5*atan(uv.x-center.x, uv.y-center.y);
+    float mouseAngle2 = 0.5*atan(mouseuv.x-center.x, mouseuv.y-center.y);
+    if(((circlularAngle >= mouseAngle - 0.025) && (circlularAngle <= mouseAngle + 0.025))) {
         float gradient = 1.0-50.0*abs(circlularAngle-mouseAngle);
+        color = vec3(1.0, 1.0, 0.53)*gradient;
+    }
+    else if (((circlularAngle2 >= mouseAngle2 - 0.025) && (circlularAngle2 <= mouseAngle2 + 0.025))) {
+        float gradient = 1.0-50.0*abs(circlularAngle2-mouseAngle2);
         color = vec3(1.0, 1.0, 0.53)*gradient;
     }
     color += vec3(sdCircle(center, uv, radius));
