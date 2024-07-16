@@ -19,10 +19,12 @@ void main()
     vec2 point = fract(uv2 + u_time);
     float radius = 0.3*(1.0-length(uv));
     float alpha = sdCircle(vec2(0.5), point, radius);
-    alpha += 0.5*sdCircle(vec2(0.5), point*2.0 - vec2(0.0, 0.0), radius);
-    alpha += 0.5*sdCircle(vec2(0.5), point*2.0 - vec2(1.0, 1.0), radius);
-    alpha += 0.5*sdCircle(vec2(0.5), point*2.0 - vec2(1.0, 0.0), radius);
-    alpha += 0.5*sdCircle(vec2(0.5), point*2.0 - vec2(0.0, 1.0), radius);
+    for(float i = 0.0; i < 2.0; i++) {
+        for(float j = 0.0; j < 2.0; j++) {
+            alpha += 0.5*sdCircle(vec2(0.5), point*2.0 - vec2(mod(j, 2.0), mod(i, 2.0)), radius);
+        }
+    }
+    
 
     
     gl_FragColor = vec4(color, alpha);
