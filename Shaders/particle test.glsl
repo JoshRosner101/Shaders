@@ -22,7 +22,7 @@ void main()
     for(float k = 1.0; k <= 2.0; k++) {
         for(float i = 0.0; i < 2.0; i++) {
             for(float j = 0.0; j < 2.0; j++) {
-                alpha += 0.5*sdCircle(vec2(0.5), point*2.0*k - vec2(mod(j, 2.0), mod(i, 2.0))*k, radius);
+                alpha += 0.5*sdCircle(vec2(0.5)*k, point*2.0*k - vec2(mod(j, 2.0), mod(i, 2.0))*k, radius/k);
             }
         }
     }
