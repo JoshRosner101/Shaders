@@ -19,11 +19,16 @@ void main()
     vec2 point = fract(uv2 + u_time);
     float radius = 0.3*(1.0-length(uv));
     float alpha = sdCircle(vec2(0.5), point, radius);
-    for(float k = 1.0; k <= 2.0; k++) {
-        for(float i = 0.0; i < 2.0; i++) {
-            for(float j = 0.0; j < 2.0; j++) {
-                alpha += 0.5*sdCircle(vec2(0.5)*k, point*2.0*k - vec2(mod(j, 2.0), mod(i, 2.0))*k, radius/k);
-            }
+    // for(float k = 1.0; k <= 2.0; k++) {
+    //     for(float i = 0.0; i < 2.0; i++) {
+    //         for(float j = 0.0; j < 2.0; j++) {
+    //             alpha += 0.5*sdCircle(vec2(0.5)*k, point*2.0*k - vec2(mod(j, 2.0), mod(i, 2.0))*k, radius/k);
+    //         }
+    //     }
+    // }
+    for(float i = -1.0; i < 2.0; i+=2.0) {
+        for(float j = 0.0; j < 2.0; j++) {
+            alpha += 0.5*sdCircle(vec2(0.5) + i*0.25*vec2(mod(j + 1.0, 2.0), mod(j, 2.0)), point, radius/2.0);
         }
     }
     
