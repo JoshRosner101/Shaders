@@ -26,10 +26,10 @@ void main()
     //         }
     //     }
     // }
-    for(float i = -1.0; i < 2.0; i+=2.0) {
-        for(float j = 0.0; j < 2.0; j++) {
-            alpha += 0.5*sdCircle(vec2(0.5) + i*0.25*vec2(mod(j + 1.0, 2.0), mod(j, 2.0)), point, radius/2.0);
-        }
+
+    for(float i = 0.0; i < 4.0; i++) {
+        float theta = i*3.1415/2.0 + u_time;
+        alpha += 0.5*sdCircle(vec2(0.5) + 0.25*vec2(cos(theta), sin(theta)), point, radius/2.0);
     }
     
 
