@@ -28,7 +28,7 @@ void main()
     // }
 
     for(float i = 0.0; i < 4.0; i++) {
-        float theta = i*3.1415/2.0 + u_time;
+        float theta = i*3.1415/2.0 + 3.1415/2.0*smoothstep(0.0, 1.0, fract(u_time/1.5));
         alpha += 0.5*sdCircle(vec2(0.5) + 0.25*vec2(cos(theta), sin(theta)), point, radius/2.0);
     }
     
