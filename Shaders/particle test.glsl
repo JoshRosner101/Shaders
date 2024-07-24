@@ -28,9 +28,11 @@ void main()
     //Flips direction for every other circle
     float direction = (mod(tile.x, 2.0)*2.0-1.0)*(mod(tile.y, 2.0)*2.0-1.0);
 
-    const float numCircles = 7.0;
+    const float rotationSpeed = 1.0;
+    const float numCircles = 5.0;
+    float angle = 6.283/numCircles;
     for(float i = 0.0; i < numCircles; i++) {
-        float theta = i*6.283/numCircles + direction*6.283/numCircles*smoothstep(0.0, 1.0, fract(u_time/1.5));
+        float theta = i*angle + direction*angle*smoothstep(0.0, 1.0, fract(u_time/1.5*rotationSpeed));
         alpha += 0.5*sdCircle(vec2(0.5) + radius*vec2(cos(theta), sin(theta)), point, radius/2.0);
     }
 
