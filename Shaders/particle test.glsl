@@ -23,7 +23,7 @@ void main()
 
     float radius = 0.3*(1.0-length(uv));
     float alpha = 0.0;
-    alpha += sdCircle(vec2(0.5), point, radius);
+    color += 0.25*sdCircle(vec2(0.5), point, radius/2.0);
 
     //Flips direction for every other circle
     float direction = (mod(tile.x, 2.0)*2.0-1.0)*(mod(tile.y, 2.0)*2.0-1.0);
@@ -33,7 +33,7 @@ void main()
     float angle = 6.283/numCircles;
     for(float i = 0.0; i < numCircles; i++) {
         float theta = i*angle + direction*angle*smoothstep(0.0, 1.0, fract(u_time/1.5*rotationSpeed));
-        alpha += 0.5*sdCircle(vec2(0.5) + radius*vec2(cos(theta), sin(theta)), point, radius/2.0);
+        alpha += 0.5*sdCircle(vec2(0.5) + radius*vec2(cos(theta), sin(theta)), point, radius);
     }
 
     //This adds shading
