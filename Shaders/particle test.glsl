@@ -43,6 +43,8 @@ void main()
 
     //This adds background color
     vec3 background = vec3(0.1);
+    // Adds soft outer glow
+    background += 0.005*vec3(length(vec2(0.0) - uv));
     color += background;
     
     gl_FragColor = vec4(color, 1.0);
