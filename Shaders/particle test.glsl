@@ -14,7 +14,7 @@ void main()
     // -1.0 to 1.0
     vec2 uv = (2.0*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
     vec2 uv2 = uv * 10.0;
-    vec3 color = vec3(0.15);
+    vec3 color = vec3(0.0);
 
     vec2 movinguv2 = uv2 + u_time;
 
@@ -40,6 +40,10 @@ void main()
 
     //This adds back the color
     color *= 0.5+0.5*cos(u_time+uv.xyx+vec3(0,2,4));
+
+    //This adds background color
+    vec3 background = vec3(0.1);
+    color += background;
     
     gl_FragColor = vec4(color, 1.0);
 }
