@@ -13,7 +13,7 @@ void main()
 {
     // -1.0 to 1.0
     vec2 uv = (2.0*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
-    vec2 uv2 = uv * 10.0;
+    vec2 uv2 = uv * 5.0;
     vec3 color = vec3(0.0);
 
     vec2 movinguv2 = uv2 + u_time;
@@ -21,7 +21,7 @@ void main()
     vec2 point = fract(movinguv2);
     vec2 tile = floor(movinguv2);
 
-    float radius = 0.3*(1.0-length(uv)*0.75);
+    float radius = 0.25*(1.0-length(uv)*0.75);
     color += 0.25*sdCircle(vec2(0.5), point, radius/4.0);
 
     //Flips direction for every other circle
@@ -44,7 +44,7 @@ void main()
     //This adds background color
     vec3 background = vec3(0.1);
     // Adds soft outer glow
-    background += 0.025*vec3(length(vec2(0.0) - uv));
+    background += vec3(0.025*1.0-0.3*radius);
     color += background;
     
     gl_FragColor = vec4(color, 1.0);
