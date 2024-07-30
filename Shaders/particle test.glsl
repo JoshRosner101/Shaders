@@ -46,7 +46,8 @@ void main()
     // Adds soft outer glow
     background += vec3(0.025*1.0-0.3*radius);
     color += background;
-    color += 0.1*length(0.5*point*vec2(cos(3.1415/2.0), sin(3.1415/2.0)));
+    // Adds soft tiling
+    color += 0.025*length(0.5*point);
     
     gl_FragColor = vec4(color, 1.0);
 }
