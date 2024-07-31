@@ -13,13 +13,14 @@ void main()
 {
     // -1.0 to 1.0
     vec2 uv = (2.0*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
-    vec2 uv2 = uv * 5.0;
+    vec2 scaledUv = uv * 5.0;
     vec3 color = vec3(0.0);
 
-    vec2 movinguv2 = uv2 + u_time;
+    vec2 movement = vec2(u_time+cos(u_time), u_time+sin(u_time));
+    vec2 movingScaledUv = scaledUv + movement;
 
-    vec2 point = fract(movinguv2);
-    vec2 tile = floor(movinguv2);
+    vec2 point = fract(movingScaledUv);
+    vec2 tile = floor(movingScaledUv);
 
     float radius = 0.25*(1.0-length(uv)*0.75);
     color += 0.25*sdCircle(vec2(0.5), point, radius/4.0);
