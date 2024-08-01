@@ -50,5 +50,8 @@ void main()
     // Adds soft tiling
     color += 0.025*length(0.5*point);
     
+    //Creates small tiles
+    color *= vec3(length(fract(uv*100.0)));
+
     gl_FragColor = vec4(color, 1.0);
 }
