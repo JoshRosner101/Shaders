@@ -16,7 +16,8 @@ void main()
     vec2 scaledUv = uv * 5.0;
     vec3 color = vec3(0.0);
 
-    vec2 movement = vec2(u_time+cos(u_time), u_time+sin(u_time));
+    vec2 movement = vec2(u_time+cos(u_time)*sin(u_time), u_time+sin(u_time)*tan(u_time));
+    //vec2(u_time+cos(u_time), u_time+sin(u_time));
     vec2 movingScaledUv = scaledUv + movement;
 
     vec2 point = fract(movingScaledUv);
@@ -51,7 +52,7 @@ void main()
     color += 0.025*length(0.5*point);
     
     //Creates small tiles
-    color *= vec3(length(fract(uv*100.0)));
+    //color *= vec3(length(fract(uv*100.0)));
 
     gl_FragColor = vec4(color, 1.0);
 }
