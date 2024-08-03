@@ -16,7 +16,9 @@ void main()
     vec2 scaledUv = uv * 5.0;
     vec3 color = vec3(0.0);
 
-    vec2 movement = vec2(u_time+cos(u_time)*sin(u_time), u_time+sin(u_time)*tan(u_time));
+    vec2 movement = vec2(sin(u_time),cos(u_time))/u_time;
+    
+    //vec2(u_time+cos(u_time)*sin(u_time), u_time+sin(u_time)*tan(u_time));
     //vec2(u_time+cos(u_time), u_time+sin(u_time));
     vec2 movingScaledUv = scaledUv + movement;
 
