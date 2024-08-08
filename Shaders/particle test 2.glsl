@@ -67,10 +67,12 @@ void main()
 
     //Cylinder
     const float HEIGHT = 10.0;
-    const float SCALE = 1.0;
+    const float SCALE = 2.0;
+    const float DISPLACE_X = 0.0;
+    const float DISPLACE_Y = -0.5;
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
-            color += colorize(j/HEIGHT)*vec3(sdCircle(0.5*vec2(cos(i*6.283/PARTICLE_COUNT + u_time),j/HEIGHT*SCALE), uv, 0.02));
+            color += colorize(j/HEIGHT)*vec3(sdCircle(0.5*vec2(cos(i*6.283/PARTICLE_COUNT + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(i*6.283/PARTICLE_COUNT + u_time) + DISPLACE_Y), uv, 0.02));
         }
     }
 
