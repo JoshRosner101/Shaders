@@ -74,7 +74,8 @@ void main()
     const float SKEW = 1.0;
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
-            RADIUS = i/PARTICLE_COUNT;
+            RADIUS = sin(j*3.1415/8.0);
+            //RADIUS = i/PARTICLE_COUNT;
             color += colorize(j/HEIGHT)*vec3(sdCircle(0.5*vec2(RADIUS*cos(i*6.283/PARTICLE_COUNT + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(i*6.283/PARTICLE_COUNT + u_time*SKEW) + DISPLACE_Y), uv, 0.02));
         }
     }
