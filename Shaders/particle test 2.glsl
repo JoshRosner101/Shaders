@@ -75,6 +75,7 @@ void main()
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
             //RADIUS = sin(j*3.1415/8.0);
+						//RADIUS = (i*i)/(j*j)
             RADIUS = i/PARTICLE_COUNT;
 						float angle = i*6.283/PARTICLE_COUNT;
 						vec3 uniqueColor = colorize(j/HEIGHT);
