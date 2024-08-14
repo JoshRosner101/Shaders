@@ -67,15 +67,15 @@ void main()
 
     //Cylinder
     const float HEIGHT = 3.0;
-    const float SCALE = 2.0;
+    const float SCALE = 1.0;
     const float DISPLACE_X = 0.0;
     const float DISPLACE_Y = -0.5;
-    float RADIUS = -0.5;
-    const float SKEW = 1.0;
+    float RADIUS = 0.5;
+    const float SKEW = -2.0;
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
             //RADIUS = sin(j*3.1415/8.0);
-						//RADIUS = (i*i)/(j*j);
+						RADIUS = (i*i)/(j*j);
             //RADIUS = i/PARTICLE_COUNT;
 						float angle = i*6.283/PARTICLE_COUNT;
 						vec3 uniqueColor = colorize(j/HEIGHT);
