@@ -75,12 +75,12 @@ void main()
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
             //RADIUS = sin(j*3.1415/8.0);
-						//RADIUS = (i*i)/(j*j)
+						//RADIUS = (i*i)/(j*j);
             //RADIUS = i/PARTICLE_COUNT;
 						float angle = i*6.283/PARTICLE_COUNT;
 						vec3 uniqueColor = colorize(j/HEIGHT);
-						float particles = sdCircle(0.5*vec2(RADIUS*cos(angle + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(angle + u_time*SKEW) + DISPLACE_Y), uv, 0.02);
-            color += uniqueColor*vec3(particles);
+						vec3 particles = vec3(sdCircle(0.5*vec2(RADIUS*cos(angle + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(angle + u_time*SKEW) + DISPLACE_Y), uv, 0.02));
+            color += uniqueColor*particles;
         }
     }
 
