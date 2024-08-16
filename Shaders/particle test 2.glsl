@@ -57,18 +57,19 @@ void main()
     vec2 uv = (2.0*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
     vec3 color = vec3(0.0);
 
-    const float PARTICLE_COUNT = 20.0;
-    const float HEIGHT = 3.0;
-    const float SCALE = 1.0;
+    const float PARTICLE_COUNT = 20.0;\
+    // 3.0 is rgb
+    const float HEIGHT = 10.0;
+    const float SCALE = 0.5;
     const float DISPLACE_X = 0.0;
     const float DISPLACE_Y = -0.5;
     float RADIUS = 0.5;
-    const float SKEW = -2.0;
+    const float SKEW = 1.0;
     for(float j = 0.0; j < HEIGHT; j++) {
         for(float i = 0.0; i < PARTICLE_COUNT; i++) {
             //RADIUS = sin(j*3.1415/8.0);
 			//RADIUS = (i*i)/(j*j);
-            RADIUS = i/PARTICLE_COUNT;
+            // RADIUS = i/PARTICLE_COUNT;
             float angle = i*6.283/PARTICLE_COUNT;
             vec3 uniqueColor = colorize(j/HEIGHT);
             vec3 particles = vec3(sdCircle(0.5*vec2(RADIUS*cos(angle + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(angle + u_time*SKEW) + DISPLACE_Y), uv, 0.02));
