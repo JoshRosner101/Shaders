@@ -73,7 +73,11 @@ void main()
             float angle = i*6.283/PARTICLE_COUNT;
             float rotationAngle = 3.1415/8.0;
             vec3 uniqueColor = colorize(j/HEIGHT);
-            vec3 particles = vec3(sdCircle(0.5*vec2(RADIUS*cos(angle + u_time) + DISPLACE_X,j/HEIGHT*SCALE + 0.5*sin(angle + u_time*SKEW) + DISPLACE_Y)*vec2(cos(rotationAngle),sin(rotationAngle)), uv, 0.02));
+            
+            float x = RADIUS*cos(angle + u_time) + DISPLACE_X;
+            float y = j/HEIGHT*SCALE + 0.5*sin(angle + u_time*SKEW) + DISPLACE_Y;
+            vec2 xy = 0.5*vec2(x,y)*vec2(cos(rotationAngle),sin(rotationAngle));
+            vec3 particles = vec3(sdCircle(xy, uv, 0.02));
             color += uniqueColor*particles;
         }
     }
